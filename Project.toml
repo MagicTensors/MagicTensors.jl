@@ -1,10 +1,28 @@
 name = "MagicTensors"
 uuid = "ec7fc9ff-011e-4a34-a9a6-2d5e1a758b79"
+version = "0.0.1"
 authors = ["Gerald E. Fux"]
-version = "0.1.0"
+
+[deps]
+ITensorMPS = "0d1a4710-d33b-49a5-8f18-73bdf49b47e2"
+ITensors = "9136182c-28ba-11e9-034c-db9fb085ebd5"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+QuantumClifford = "0525e862-1e90-11e9-3e4d-1b39d7109de1"
+QuantumOpticsBase = "4f57444f-1401-5e15-980d-4471b28d5678"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
-julia = "1.10.10"
+ITensorMPS = "0.3.45"
+ITensors = "0.9.25"
+LinearAlgebra = "1.10.0"
+Printf = "1.10.0"
+QuantumClifford = "0.11.4"
+QuantumOpticsBase = "0.5.10"
+Random = "1.10.0"
+StaticArrays = "1.9.18"
+julia = "1.12.6"
 
 [extras]
 JET = "c3a54625-cd67-489e-a8e7-0a5a0ff4e31b"

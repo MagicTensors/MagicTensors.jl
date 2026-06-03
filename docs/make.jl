@@ -3,6 +3,10 @@ using Documenter
 
 DocMeta.setdocmeta!(MagicTensors, :DocTestSetup, :(using MagicTensors); recursive=true)
 
+cp(joinpath(@__DIR__, "..", "CONTRIBUTING.md"),
+   joinpath(@__DIR__, "src", "contributing-TMP.md");
+   force=true)
+
 makedocs(;
     modules=[MagicTensors],
     authors="Gerald E. Fux",
@@ -12,8 +16,9 @@ makedocs(;
         edit_link="main",
         assets=String[],
     ),
-    pages=[
+    pages = [
         "Home" => "index.md",
+        "Contributing" => "contributing-TMP.md",
     ],
 )
 

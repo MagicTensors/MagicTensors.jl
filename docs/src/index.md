@@ -6,9 +6,6 @@ CurrentModule = MagicTensors
 
 Documentation for [MagicTensors](https://github.com/gefux/MagicTensors.jl).
 
-```@index
-```
+[ITensor paper](REFERENCES.md#2007.14822.ITensor)
 
-```@autodocs
-Modules = [MagicTensors]
-```
+`TODO`

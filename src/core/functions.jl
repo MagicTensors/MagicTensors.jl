@@ -1,0 +1,86 @@
+# -- Abstract Functions --------------------------------------------------------------------
+
+"""
+    apply!
+
+TODO: update docstring.
+Applies a Clifford unitary or gate to a matrix product state, another Clifford unitary, or a
+sum of Pauli strings. This is a generic function that should be implemented for the concrete
+types involved.
+
+The following methods should be implemented for the concrete subtypes of
+`AbstractCliffordGate`, `AbstractCliffordUnitary`, and `AbstractPauliSum`:
+- `apply!(state::MPS, gate::AbstractCliffordGate, sites)`:
+    applies the gate to the given state in-place.
+- `apply!(C::AbstractCliffordUnitary, gate::AbstractCliffordGate, sites)`:
+    applies the gate to the given state in-place.
+- `apply!(C::AbstractCliffordUnitary,V::AbstractCliffordUnitary)`:
+    applies the Clifford unitary V to the Clifford unitary C in-place.
+- `apply!(x::AbstractPauliSum, C::AbstractCliffordUnitary)`:
+    applies the Clifford unitary to the given Pauli sum in-place.
+"""
+function apply! end
+
+# apply_to_clifford!
+# apply_to_clifford_dagger!
+# apply_to_mps!
+
+```
+    conjugate
+
+TODO: write docstring.
+```
+function conjugate end
+
+# disentangle!
+
+"""
+    embed
+
+TODO: write docstring.
+"""
+function embed end
+
+# entanglement_entropy
+# expectation
+# get_clifford
+# get_mps
+
+"""
+    nsites(obj) -> n
+
+TODO: Update docstring.
+Returns the number of qubit or qudit sites `n` in an object.
+
+# Description
+Returns the number of qubits or qudits in an object `obj`.
+
+- Objects `obj` include:
+    - `AbstractCAMPS`
+    - `AbstractCliffordGate`
+    - `AbstractCliffordGateSet`
+    - `AbstractCliffordUnitary`
+    - `AbstractPauli`
+    - `AbstractPauliSum`
+    - `MPS`
+
+# Arguments
+- `obj`: -- Object acting on or representing a certain number of qubits or qudits.
+
+# Returns
+- `n::Int`: -- Number of qubits or qudits in object `obj`.
+
+# See also 
+- TODO
+"""
+function nsites end
+# - [`AbstractCAMPS`](@ref), [`AbstractCliffordGate`](@ref),
+#     [`AbstractCliffordGateSet`](@ref), [`AbstractCliffordUnitary`](@ref),
+#     [`AbstractPauli`](@ref), [`AbstractPauliSum`](@ref),
+
+
+# site_type
+# stabilizer_entropy
+# transform!
+
+# ------------------------------------------------------------------------------------------

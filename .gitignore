@@ -1,5 +1,4 @@
 *DEV*
-*TMP*
 
 lcov.info
 *.jl.*.cov
@@ -9,3 +8,6 @@ lcov.info
 /docs/Manifest*.toml
 /docs/build/
 /dev/Manifest*.toml
+
+/docs/src/CONTRIBUTING.md
+/docs/src/REFERENCES.md

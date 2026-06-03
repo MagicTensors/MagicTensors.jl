@@ -4,7 +4,10 @@ using Documenter
 DocMeta.setdocmeta!(MagicTensors, :DocTestSetup, :(using MagicTensors); recursive=true)
 
 cp(joinpath(@__DIR__, "..", "CONTRIBUTING.md"),
-   joinpath(@__DIR__, "src", "contributing-TMP.md");
+   joinpath(@__DIR__, "src", "CONTRIBUTING.md");
+   force=true)
+cp(joinpath(@__DIR__, "..", "REFERENCES.md"),
+   joinpath(@__DIR__, "src", "REFERENCES.md");
    force=true)
 
 makedocs(;
@@ -18,7 +21,12 @@ makedocs(;
     ),
     pages = [
         "Home" => "index.md",
-        "Contributing" => "contributing-TMP.md",
+        "MagicTensors" => "core.md",
+        "MagicTensors.Circuit" => "circuit.md",
+        "Tutorials" => "tutorials.md",
+        "Full API" => "api.md",
+        "Contributing" => "CONTRIBUTING.md",
+        "References" => "REFERENCES.md",
     ],
 )
 

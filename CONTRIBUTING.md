@@ -30,6 +30,8 @@ find . -name '*.cov' -delete
 * Word-wrap in source files at 92 characters.
 * Use 4 spaces for indentation, no tabs.
 * Use snake_case for function and variable names, use UpperCamelCase for type names.
+* Prefix names with `_` for private functions, variables, and types.
+
 
 ### Julia File Template
 ```Julia

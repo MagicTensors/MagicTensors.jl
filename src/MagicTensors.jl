@@ -33,6 +33,8 @@ export AbstractCliffordUnitary
 include("core/cliffordgate.jl")
 export AbstractCliffordGate
 
+include("core/cliffordgateset.jl")
+export AbstractCliffordGateSet
 
 # -- Qubit ------------------------
 
@@ -48,5 +50,8 @@ export QubitCliffordUnitary
 
 include("core/qubit/cliffordgate.jl")
 export QubitCliffordGate
+
+include("core/qubit/cliffordgateset.jl")
+export QubitCliffordGateSet
 
 end

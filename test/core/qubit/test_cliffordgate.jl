@@ -1,4 +1,4 @@
-@testset "QubitCliffordGate - Basics" begin
+@testset "QubitCliffordGate" begin
     using QuantumClifford: ⊗
 
     CNOT_TIMES_H_S_MATRIX = [

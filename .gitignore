@@ -5,9 +5,11 @@ lcov.info
 *.jl.cov
 *.jl.mem
 /Manifest*.toml
-/docs/Manifest*.toml
-/docs/build/
+
 /dev/Manifest*.toml
 
+/docs/Manifest*.toml
+/docs/build/
+/docs/src/index.md
 /docs/src/CONTRIBUTING.md
 /docs/src/REFERENCES.md

@@ -25,11 +25,27 @@ function apply! end
 # apply_to_clifford_dagger!
 # apply_to_mps!
 
-```
-    conjugate
+"""
+    conjugate(P, C) -> Q
 
-TODO: write docstring.
-```
+Returns the conjugation of an Pauli string or Pauli sum by a Clifford unitary.
+
+# Description
+Computes `Q = C P C†`, where `C` is a Clifford unitary and `P` is a Pauli string or Pauli
+sum. The result `Q` is a Pauli string or Pauli sum of the same type as `P`.
+
+# Arguments
+- `P::Union{AbstractPauli, AbstractPauliSum}`: -- A Pauli string or Pauli sum to be
+    conjugated.
+- `C::AbstractCliffordUnitary`: -- A Clifford unitary to conjugate with.
+
+# Returns
+- `Q::Union{AbstractPauli, AbstractPauliSum}`: -- The conjugated Pauli string or Pauli sum
+    `C P C†`.
+
+# See also
+- [`AbstractCliffordUnitary`](@ref), [`AbstractPauli`](@ref), [`AbstractPauliSum`](@ref)
+"""
 function conjugate end
 
 # disentangle!

@@ -1,10 +1,13 @@
 using MagicTensors
 using Test
 using JET
-using QuantumClifford
-using ITensorMPS
+
+import ITensorMPS
+import QuantumClifford
 
 const MT = MagicTensors
+const IT = ITensorMPS
+const QC = QuantumClifford
 @testset "MagicTensors.jl" begin
     @testset "Code Quality" begin
         # @testset "Code linting (JET.jl)" begin
@@ -15,11 +18,15 @@ const MT = MagicTensors
     @testset "Abstract Core" begin
         include("core/test_pauli.jl")
         include("core/test_paulisum.jl")
+        include("core/test_cliffordunitary.jl")
+        include("core/test_cliffordgate.jl")
     end
 
     @testset "Qubit Core" begin
         include("core/qubit/test_pauli.jl")
         include("core/qubit/test_paulisum.jl")
+        include("core/qubit/test_cliffordunitary.jl")
+        include("core/qubit/test_cliffordgate.jl")
     end
 
 end

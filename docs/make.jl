@@ -3,12 +3,17 @@ using Documenter
 
 DocMeta.setdocmeta!(MagicTensors, :DocTestSetup, :(using MagicTensors); recursive=true)
 
-cp(joinpath(@__DIR__, "..", "CONTRIBUTING.md"),
-   joinpath(@__DIR__, "src", "CONTRIBUTING.md");
-   force=true)
-cp(joinpath(@__DIR__, "..", "REFERENCES.md"),
-   joinpath(@__DIR__, "src", "REFERENCES.md");
-   force=true)
+filenames = Dict(
+    "README.md"=>"index.md",
+    "CONTRIBUTING.md"=>"CONTRIBUTING.md",
+    "REFERENCES.md"=>"REFERENCES.md"
+)
+
+for (src, trg) in filenames
+    cp(joinpath(@__DIR__, "..", src),
+        joinpath(@__DIR__, "src", trg);
+        force=true)
+end
 
 makedocs(;
     modules=[MagicTensors],

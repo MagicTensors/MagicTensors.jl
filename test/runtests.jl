@@ -20,6 +20,7 @@ const QC = QuantumClifford
         include("core/test_paulisum.jl")
         include("core/test_cliffordunitary.jl")
         include("core/test_cliffordgate.jl")
+        include("core/test_cliffordgateset.jl")
     end
 
     @testset "Qubit Core" begin
@@ -27,6 +28,7 @@ const QC = QuantumClifford
         include("core/qubit/test_paulisum.jl")
         include("core/qubit/test_cliffordunitary.jl")
         include("core/qubit/test_cliffordgate.jl")
+        include("core/qubit/test_cliffordgateset.jl")
     end
 
 end

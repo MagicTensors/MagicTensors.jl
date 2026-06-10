@@ -7,6 +7,7 @@
 - [`QubitPauliSum`](@ref) (see also: [`AbstractPauliSum`](@ref))
 - [`QubitCliffordUnitary`](@ref) (see also: [`AbstractCliffordUnitary`](@ref))
 - [`QubitCliffordGate`](@ref) (see also: [`AbstractCliffordGate`](@ref))
+- [`QubitCliffordGateSet`](@ref) (see also: [`AbstractCliffordGateSet`](@ref))
 
 ## Functions
 - [`conjugate`](@ref)

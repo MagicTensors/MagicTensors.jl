@@ -4,6 +4,9 @@
     QubitCliffordUnitary <: AbstractCliffordUnitary
 
 Implementation of [`AbstractCliffordUnitary`](@ref) for qubit systems.
+
+# See also
+- [`AbstractCliffordUnitary`](@ref)
 """
 mutable struct QubitCliffordUnitary <: AbstractCliffordUnitary
     clifford::CliffordOperator

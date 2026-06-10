@@ -28,7 +28,7 @@ makedocs(;
     pages = [
         "Home" => "index.md",
         "MagicTensors" => "core.md",
-        "MagicTensors.Circuit" => "circuit.md",
+        "Circuits" => "circuits.md",
         "Tutorials" => "tutorials.md",
         "Full API" => "api.md",
         "Contributing" => "CONTRIBUTING.md",

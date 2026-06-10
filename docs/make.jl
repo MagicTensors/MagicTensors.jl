@@ -4,16 +4,17 @@ using Documenter
 DocMeta.setdocmeta!(MagicTensors, :DocTestSetup, :(using MagicTensors); recursive=true)
 
 filenames = Dict(
-    "README.md"=>"index.md",
-    "CONTRIBUTING.md"=>"CONTRIBUTING.md",
-    "REFERENCES.md"=>"REFERENCES.md"
+    joinpath(@__DIR__, "..","README.md")=>joinpath(@__DIR__, "src", "index.md"),
+    joinpath(@__DIR__, "..","CONTRIBUTING.md")=>joinpath(@__DIR__, "src","CONTRIBUTING.md"),
+    joinpath(@__DIR__, "..","REFERENCES.md")=>joinpath(@__DIR__, "src","REFERENCES.md"),
+    joinpath(@__DIR__, "graphics","logo.svg")=>joinpath(@__DIR__, "src","assets","logo.svg"),
+    joinpath(@__DIR__, "graphics","favicon.ico")=>joinpath(@__DIR__, "src","assets","favicon.ico"),
 )
 
 for (src, trg) in filenames
-    cp(joinpath(@__DIR__, "..", src),
-        joinpath(@__DIR__, "src", trg);
-        force=true)
+    cp(src,trg; force=true)
 end
+
 
 makedocs(;
     modules=[MagicTensors],
@@ -22,7 +23,7 @@ makedocs(;
     format=Documenter.HTML(;
         canonical="https://gefux.github.io/MagicTensors.jl",
         edit_link="main",
-        assets=String[],
+        assets = ["assets/favicon.ico"]
     ),
     pages = [
         "Home" => "index.md",

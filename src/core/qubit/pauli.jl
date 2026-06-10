@@ -13,7 +13,7 @@ Implementation of `AbstractPauli` for qubit systems using the `QuantumClifford` 
     `QuantumClifford.PauliOperator`.
 - `QubitPauli(n::Int)`: -- return an identity operator on `n` qubits.
 - `@QubitPauli_str(s::AbstractString)`: -- macro, using the same String to Pauli conversion
-    as in `QuantumClifford` (e.g. `QubitPauli"-iIXYZ").
+    as in `QuantumClifford` (e.g. `QubitPauli"-iIXYZ"`).
 
 # See also
 - [`AbstractPauli`](@ref)

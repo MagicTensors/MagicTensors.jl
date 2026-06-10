@@ -14,6 +14,9 @@ package. The symbol `S` specifies the gate set variant:
     All `K`-qubit Clifford gates with `4^K` phase variants.
 - `QubitCliffordGateSet{2, :entangle}`:
     19 two-qubit Clifford gates with entangling properties, excluding the identity.
+
+# See also
+- [`AbstractCliffordGateSet`](@ref)
 """
 struct QubitCliffordGateSet{K,S} <: AbstractCliffordGateSet
     function QubitCliffordGateSet{K,S}() where {K,S}

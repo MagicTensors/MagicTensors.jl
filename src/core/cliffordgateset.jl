@@ -16,7 +16,7 @@ For a Clifford gate set `x` implementations must support:
 - `Base.length(x) -> K`: -- returns the number of gates `K` in the set `x`.
 - `Base.one(x) -> I`: -- return the identity gate w.r.t. set `x`; the identity `I` need not
     be in `x`.
-- `nsites(x) -> n`: -- returns the number of sites `n` the gates in the set act on.
+- `nsites(x) -> n`: -- returns the number of sites `n` on which the gates in the set act.
 
 # See also
 - [`AbstractCliffordGate`](@ref), [`QubitCliffordGateSet`](@ref)

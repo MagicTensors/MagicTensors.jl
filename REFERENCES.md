@@ -4,15 +4,16 @@
 
 ## Consider citing
 
-- The [ITensor paper](REFERENCES.md#2007.14822.ITensor)
-
+- The ITensor paper: [Fishman et al, arXiv:2007.14822](REFERENCES.md#2007.14822.Fishman)
 ## Bibliography
 
-### 2007.14822.ITensor
 
+### 2007.14822.Fishman
+<!-- [Fishman et al, arXiv:2007.14822](REFERENCES.md#2007.14822.Fishman) -->
 The ITensor Software Library for Tensor Network Calculations: [arXiv](https://doi.org/10.48550/arXiv.2007.14822), [SciPost Phys.](https://doi.org/10.21468/SciPostPhysCodeb.4)
+
 ```bibtex
-@article{2007.14822.ITensor,
+@article{2007.14822.Fishman,
     title={{The ITensor Software Library for Tensor Network Calculations}},
     author={Matthew Fishman and Steven R. White and E. Miles Stoudenmire},
     journal={SciPost Phys. Codebases},

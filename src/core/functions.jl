@@ -21,9 +21,23 @@ The following methods should be implemented for the concrete subtypes of
 """
 function apply! end
 
-# apply_to_clifford!
-# apply_to_clifford_dagger!
-# apply_to_mps!
+"""
+    apply_to_clifford!
+TODO
+"""
+function apply_to_clifford! end
+
+"""
+    apply_to_clifford_dagger!
+TODO
+"""
+function apply_to_clifford_dagger! end
+
+"""
+    apply_to_mps!
+TODO
+"""
+function apply_to_mps! end
 
 """
     conjugate(P, C) -> Q
@@ -58,9 +72,25 @@ TODO: write docstring.
 function embed end
 
 # entanglement_entropy
-# expectation
-# get_clifford
-# get_mps
+
+"""
+    expectation
+TODO
+"""
+function expectation end
+
+"""
+    get_clifford_copy
+TODO
+"""
+function get_clifford_copy end
+
+"""
+    get_mps
+TODO
+"""
+function get_mps end
+
 
 """
     nsites(obj) -> n
@@ -97,6 +127,21 @@ function nsites end
 
 # site_type
 # stabilizer_entropy
-# transform!
+
+
+"""
+    transform!
+
+TODO: write docstring.
+"""
+function transform! end
+
+
+# -- Interface Methods ---------------------------------------------------------------------
+
+function expectation(
+    x, y::Union{AbstractPauliSum, AbstractPauli}, sites::AbstractVector{<:Int})
+    return expectation(x, embed(y,nsites(x),sites))
+end
 
 # ------------------------------------------------------------------------------------------

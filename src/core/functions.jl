@@ -71,7 +71,12 @@ TODO: write docstring.
 """
 function embed end
 
-# entanglement_entropy
+"""
+    entanglement_entropy
+
+TODO
+"""
+function entanglement_entropy end
 
 """
     expectation
@@ -117,17 +122,18 @@ Returns the number of qubits or qudits in an object `obj`.
 - `n::Int`: -- Number of qubits or qudits in object `obj`.
 
 # See also 
-- TODO
+- [`AbstractCAMPS`](@ref), [`AbstractCliffordGate`](@ref),
+    [`AbstractCliffordGateSet`](@ref), [`AbstractCliffordUnitary`](@ref),
+    [`AbstractPauli`](@ref), [`AbstractPauliSum`](@ref),
 """
 function nsites end
-# - [`AbstractCAMPS`](@ref), [`AbstractCliffordGate`](@ref),
-#     [`AbstractCliffordGateSet`](@ref), [`AbstractCliffordUnitary`](@ref),
-#     [`AbstractPauli`](@ref), [`AbstractPauliSum`](@ref),
 
+"""
+    stabilizer_entropy
 
-# site_type
-# stabilizer_entropy
-
+TODO
+"""
+function stabilizer_entropy end
 
 """
     transform!

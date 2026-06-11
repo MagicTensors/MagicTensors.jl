@@ -26,6 +26,7 @@ const QC = QuantumClifford
         include("core/test_mps.jl")
         include("core/test_camps.jl")
         include("core/test_functions.jl")
+        include("core/test_entropy.jl")
     end
 
     @testset "Qubit Core" begin

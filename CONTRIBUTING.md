@@ -14,6 +14,8 @@ and view the documentation page at <http://localhost:8000>.
 
 ## Testing and Code Coverage
 
+* When testing no packages other than `MagicTensors` is included in the name space through `using`. However, `LinearAlgebra`, `ITensorMPS`, and `QuantumClifford` are imported through `import`. These names are abbreviated with `MT`, `LA`, `IT`, and `QC`, respectively.
+
 ``` shell
 julia --project=@. -e 'using Pkg; Pkg.instantiate()'
 julia --project=dev -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'

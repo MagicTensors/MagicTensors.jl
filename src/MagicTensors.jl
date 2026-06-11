@@ -1,7 +1,7 @@
 """
     MagicTensors
 
-TODO: Module docstring.
+TODO
 """
 module MagicTensors
 
@@ -42,6 +42,15 @@ export AbstractCAMPS
 
 include("core/entropy.jl")
 
+include("core/disentangler.jl")
+export AbstractDisentangler
+export AbstractStandAloneDisentangler
+export AbstractSweepDisentangler
+export TrivialDisentangler
+export IterativeDisentangler
+export GreedySweepDisentangler
+
+
 # -- Qubit ------------------------
 
 include("core/qubit/pauli.jl")
@@ -68,10 +77,12 @@ export QubitCAMPS
 
 include("core/functions.jl")
 export apply!
+export apply_and_disentangle!
 export apply_to_clifford!
 export apply_to_clifford_dagger!
 export apply_to_mps!
 export conjugate
+export disentangle!
 export embed
 export entanglement_entropy
 export expectation

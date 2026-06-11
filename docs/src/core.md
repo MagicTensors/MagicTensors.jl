@@ -8,8 +8,17 @@
 - [`QubitCliffordUnitary`](@ref) (see also: [`AbstractCliffordUnitary`](@ref))
 - [`QubitCliffordGate`](@ref) (see also: [`AbstractCliffordGate`](@ref))
 - [`QubitCliffordGateSet`](@ref) (see also: [`AbstractCliffordGateSet`](@ref))
+- [`QubitCAMPS`](@ref) (see also: [`AbstractCAMPS`](@ref))
 
 ## Functions
+- [`apply!`](@ref)
+- [`apply_to_clifford!`](@ref)
+- [`apply_to_clifford_dagger!`](@ref)
+- [`apply_to_mps!`](@ref)
 - [`conjugate`](@ref)
 - [`embed`](@ref)
+- [`expectation`](@ref)
+- [`get_clifford_copy`](@ref)
+- [`get_mps`](@ref)
 - [`nsites`](@ref)
+- [`transform!`](@ref)

@@ -6,20 +6,18 @@ TODO: Module docstring.
 module MagicTensors
 
 using Printf
+
+using ITensorMPS: MPS
 using QuantumClifford: CliffordOperator, PauliOperator, Stabilizer
 
+import LinearAlgebra
+import ITensors
 import ITensorMPS
 import QuantumClifford
 import QuantumOpticsBase
 
 
 # -- Abstract ---------------------
-
-include("core/functions.jl")
-export apply!
-export conjugate
-export embed
-export nsites
 
 include("core/pauli.jl")
 export AbstractPauli
@@ -35,6 +33,12 @@ export AbstractCliffordGate
 
 include("core/cliffordgateset.jl")
 export AbstractCliffordGateSet
+
+include("core/mps.jl")
+export singular_values
+
+include("core/camps.jl")
+export AbstractCAMPS
 
 # -- Qubit ------------------------
 
@@ -53,5 +57,24 @@ export QubitCliffordGate
 
 include("core/qubit/cliffordgateset.jl")
 export QubitCliffordGateSet
+
+include("core/qubit/camps.jl")
+export QubitCAMPS
+
+
+# -- Functions ------------------------
+
+include("core/functions.jl")
+export apply!
+export apply_to_clifford!
+export apply_to_clifford_dagger!
+export apply_to_mps!
+export conjugate
+export embed
+export expectation
+export get_clifford_copy
+export get_mps
+export nsites
+export transform!
 
 end

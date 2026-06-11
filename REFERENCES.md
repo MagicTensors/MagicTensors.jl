@@ -9,7 +9,6 @@
 
 
 ### 2007.14822.Fishman
-<!-- [Fishman et al, arXiv:2007.14822](REFERENCES.md#2007.14822.Fishman) -->
 The ITensor Software Library for Tensor Network Calculations: [arXiv](https://doi.org/10.48550/arXiv.2007.14822), [SciPost Phys.](https://doi.org/10.21468/SciPostPhysCodeb.4)
 
 ```bibtex
@@ -23,4 +22,5 @@ The ITensor Software Library for Tensor Network Calculations: [arXiv](https://do
     doi={10.21468/SciPostPhysCodeb.4},
     url={https://scipost.org/10.21468/SciPostPhysCodeb.4},
 }
+[Fishman et al, arXiv:2007.14822](REFERENCES.md#2007.14822.Fishman)
 ```

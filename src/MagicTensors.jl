@@ -40,6 +40,8 @@ export singular_values
 include("core/camps.jl")
 export AbstractCAMPS
 
+include("core/entropy.jl")
+
 # -- Qubit ------------------------
 
 include("core/qubit/pauli.jl")
@@ -71,10 +73,12 @@ export apply_to_clifford_dagger!
 export apply_to_mps!
 export conjugate
 export embed
+export entanglement_entropy
 export expectation
 export get_clifford_copy
 export get_mps
 export nsites
+export stabilizer_entropy
 export transform!
 
 end

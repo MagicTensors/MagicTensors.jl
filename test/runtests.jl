@@ -1,5 +1,5 @@
 using Test
-# using JET
+using JET
 
 using MagicTensors
 
@@ -13,11 +13,11 @@ const IT = ITensorMPS
 const QC = QuantumClifford
 
 @testset "MagicTensors.jl" begin
-    # @testset "Code Quality" begin
-    #     @testset "Code linting (JET.jl)" begin
-    #         JET.test_package(MagicTensors; target_modules=(MagicTensors,))
-    #     end
-    # end
+    @testset "Code Quality" begin
+        @testset "Code linting (JET.jl)" begin
+            JET.test_package(MagicTensors; target_modules=(MagicTensors,))
+        end
+    end
 
     @testset "Abstract Core" begin
         include("core/test_pauli.jl")

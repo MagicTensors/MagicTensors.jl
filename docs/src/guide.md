@@ -1,4 +1,4 @@
-# MagicTensors' Core Package
+# MagicTensors' User Guide
 
 `TODO`
 
@@ -17,6 +17,8 @@
     - [`IterativeDisentangler`](@ref)
     - [`AbstractSweepDisentangler `](@ref)
       - [`GreedySweepDisentangler`](@ref)
+  - [`AbstractDmrgDisentangler`](@ref)
+    - [`IterativeDmrgDisentangler`](@ref)
   
 ## Functions
 - [`apply!`](@ref)
@@ -26,6 +28,7 @@
 - [`apply_to_mps!`](@ref)
 - [`conjugate`](@ref)
 - [`disentangle!`](@ref)
+- [`dmrg!`](@ref)
 - [`embed`](@ref)
 - [`entanglement_entropy`](@ref)
 - [`expectation`](@ref)

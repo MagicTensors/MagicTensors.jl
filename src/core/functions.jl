@@ -3,23 +3,15 @@
 """
     apply!
 
-TODO: update docstring.
-Applies a Clifford unitary or gate to a matrix product state, another Clifford unitary, or a
-sum of Pauli strings. This is a generic function that should be implemented for the concrete
-types involved.
-
-The following methods should be implemented for the concrete subtypes of
-`AbstractCliffordGate`, `AbstractCliffordUnitary`, and `AbstractPauliSum`:
-- `apply!(state::MPS, gate::AbstractCliffordGate, sites)`:
-    applies the gate to the given state in-place.
-- `apply!(C::AbstractCliffordUnitary, gate::AbstractCliffordGate, sites)`:
-    applies the gate to the given state in-place.
-- `apply!(C::AbstractCliffordUnitary,V::AbstractCliffordUnitary)`:
-    applies the Clifford unitary V to the Clifford unitary C in-place.
-- `apply!(x::AbstractPauliSum, C::AbstractCliffordUnitary)`:
-    applies the Clifford unitary to the given Pauli sum in-place.
+TODO
 """
 function apply! end
+
+"""
+    apply_and_disentangle!
+TODO
+"""
+function apply_and_disentangle! end
 
 """
     apply_to_clifford!
@@ -62,12 +54,17 @@ sum. The result `Q` is a Pauli string or Pauli sum of the same type as `P`.
 """
 function conjugate end
 
-# disentangle!
+"""
+    disentangle!
+
+TODO
+"""
+function disentangle! end
 
 """
     embed
 
-TODO: write docstring.
+TODO
 """
 function embed end
 
@@ -100,20 +97,19 @@ function get_mps end
 """
     nsites(obj) -> n
 
-TODO: Update docstring.
 Returns the number of qubit or qudit sites `n` in an object.
 
 # Description
 Returns the number of qubits or qudits in an object `obj`.
 
-- Objects `obj` include:
+Objects `obj` may be any of the following types:
     - `AbstractCAMPS`
     - `AbstractCliffordGate`
     - `AbstractCliffordGateSet`
     - `AbstractCliffordUnitary`
     - `AbstractPauli`
     - `AbstractPauliSum`
-    - `MPS`
+    - `ITensorMPS.MPS`
 
 # Arguments
 - `obj`: -- Object acting on or representing a certain number of qubits or qudits.
@@ -145,9 +141,14 @@ function transform! end
 
 # -- Interface Methods ---------------------------------------------------------------------
 
+function apply!(
+    x, y::Union{AbstractPauliSum, AbstractPauli}, sites::AbstractVector{<:Int}; kwargs...)
+    return apply!(x, embed(y,nsites(x),sites); kwargs...)
+end
+
 function expectation(
-    x, y::Union{AbstractPauliSum, AbstractPauli}, sites::AbstractVector{<:Int})
-    return expectation(x, embed(y,nsites(x),sites))
+    x, y::Union{AbstractPauliSum, AbstractPauli}, sites::AbstractVector{<:Int}; kwargs...)
+    return expectation(x, embed(y,nsites(x),sites); kwargs...)
 end
 
 # ------------------------------------------------------------------------------------------

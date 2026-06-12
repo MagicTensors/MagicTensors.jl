@@ -54,6 +54,10 @@ end
 # -- Interface Methods ---------------------------------------------------------------------
 
 get_mps(camps::QubitCAMPS) = camps.mps
+
+get_clifford(camps::QubitCAMPS; daggered=false) =
+    _get_clifford(camps, daggered)
+    
 get_clifford_copy(camps::QubitCAMPS; daggered=false) =
     deepcopy(_get_clifford(camps, daggered))
 

@@ -62,6 +62,13 @@ TODO
 function disentangle! end
 
 """
+    dmrg!
+
+TODO
+"""
+function dmrg! end
+
+"""
     embed
 
 TODO
@@ -80,6 +87,12 @@ function entanglement_entropy end
 TODO
 """
 function expectation end
+
+"""
+    get_clifford
+TODO
+"""
+function get_clifford end
 
 """
     get_clifford_copy

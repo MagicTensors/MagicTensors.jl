@@ -30,6 +30,7 @@ const QC = QuantumClifford
         include("core/test_functions.jl")
         include("core/test_entropy.jl")
         include("core/test_disentangler.jl")
+        include("core/test_dmrg.jl")
     end
 
     @testset "Qubit Core" begin
@@ -39,6 +40,7 @@ const QC = QuantumClifford
         include("core/qubit/test_cliffordgate.jl")
         include("core/qubit/test_cliffordgateset.jl")
         include("core/qubit/test_camps.jl")
+        include("core/qubit/test_dmrg.jl")
     end
 
     @testset "Not Implemented" begin

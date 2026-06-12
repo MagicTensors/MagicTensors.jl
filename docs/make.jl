@@ -27,8 +27,8 @@ makedocs(;
     ),
     pages = [
         "Home" => "index.md",
-        "MagicTensors" => "core.md",
-        "Circuits" => "circuits.md",
+        "User Guide" => "guide.md",
+        # "Circuits" => "circuits.md",
         "Tutorials" => "tutorials.md",
         "Full API" => "api.md",
         "Contributing" => "CONTRIBUTING.md",

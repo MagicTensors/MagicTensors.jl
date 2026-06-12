@@ -50,6 +50,9 @@ export TrivialDisentangler
 export IterativeDisentangler
 export GreedySweepDisentangler
 
+include("core/dmrg.jl")
+export AbstractDmrgDisentangler
+export IterativeDmrgDisentangler
 
 # -- Qubit ------------------------
 
@@ -72,6 +75,7 @@ export QubitCliffordGateSet
 include("core/qubit/camps.jl")
 export QubitCAMPS
 
+include("core/qubit/dmrg.jl")
 
 # -- Functions ------------------------
 
@@ -83,6 +87,7 @@ export apply_to_clifford_dagger!
 export apply_to_mps!
 export conjugate
 export disentangle!
+export dmrg!
 export embed
 export entanglement_entropy
 export expectation

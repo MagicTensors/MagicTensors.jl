@@ -38,5 +38,9 @@
         transform!(a, QubitCliffordGate(QC.tPhase), [1])
         @test expectation(MT.get_mps(a), QubitPauli"YIII") ≈ 0.5
         @test expectation(a, QubitPauli"ZIZI"; normalized=true) ≈ 1.0    
+
+        @test stabilizer_entropy(a) + 1  ≈ 1.0
+        @test stabilizer_entropy(a,100) + 1  ≈ 1.0
+        
     end
 end

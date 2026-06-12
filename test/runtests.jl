@@ -23,6 +23,7 @@ const QC = QuantumClifford
         include("core/test_paulisum.jl")
         include("core/test_cliffordunitary.jl")
         include("core/test_cliffordgate.jl")
+        include("core/test_cliffordgateset.jl")
         include("core/test_mps.jl")
         include("core/test_camps.jl")
         include("core/test_functions.jl")

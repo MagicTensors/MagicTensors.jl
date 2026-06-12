@@ -1,6 +1,7 @@
-using MagicTensors
 using Test
 # using JET
+
+using MagicTensors
 
 import LinearAlgebra
 import ITensorMPS
@@ -28,6 +29,7 @@ const QC = QuantumClifford
         include("core/test_camps.jl")
         include("core/test_functions.jl")
         include("core/test_entropy.jl")
+        include("core/test_disentangler.jl")
     end
 
     @testset "Qubit Core" begin

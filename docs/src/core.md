@@ -10,12 +10,22 @@
 - [`QubitCliffordGateSet`](@ref) (see also: [`AbstractCliffordGateSet`](@ref))
 - [`QubitCAMPS`](@ref) (see also: [`AbstractCAMPS`](@ref))
 
+## Disentanglers
+- [`AbstractDisentangler`](@ref) 
+  - [`AbstractStandAloneDisentangler`](@ref)
+    - [`TrivialDisentangler`](@ref)
+    - [`IterativeDisentangler`](@ref)
+    - [`AbstractSweepDisentangler `](@ref)
+      - [`GreedySweepDisentangler`](@ref)
+  
 ## Functions
 - [`apply!`](@ref)
+- [`apply_and_disentangle!`](@ref)
 - [`apply_to_clifford!`](@ref)
 - [`apply_to_clifford_dagger!`](@ref)
 - [`apply_to_mps!`](@ref)
 - [`conjugate`](@ref)
+- [`disentangle!`](@ref)
 - [`embed`](@ref)
 - [`entanglement_entropy`](@ref)
 - [`expectation`](@ref)

@@ -37,7 +37,7 @@ QubitCliffordGateSet(K::Int, S::Symbol) = QubitCliffordGateSet{K,S}()
 Base.eltype(::Type{QubitCliffordGateSet{K,S}}) where {K,S} = QubitCliffordGate
 Base.IteratorSize(::Type{<:QubitCliffordGateSet}) = Base.HasLength()
 Base.one(::QubitCliffordGateSet{K,S}) where {K,S} =
-    QubitCliffordGate(one(CliffordOperator,K))
+    QubitCliffordGate(one(CliffordOperator, K))
 
 
 # -- Interface Methods ---------------------------------------------------------------------
@@ -49,7 +49,9 @@ nsites(::QubitCliffordGateSet{K,S}) where {K,S} = K
 
 # -- QubitCliffordGateSet{K,:empty} --
 
-Base.length(::QubitCliffordGateSet{K,:empty}) where {K} = 0
+function Base.length(::QubitCliffordGateSet{K,:empty}) where {K}
+    return 0
+end
 
 # -- QubitCliffordGateSet{K,:all} --
 

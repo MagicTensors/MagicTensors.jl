@@ -15,6 +15,13 @@
         @test gates[3] == set[3]
     end
 
+    @testset "QubitGateSet :empty" begin
+        set = QubitCliffordGateSet(3,:empty)
+        length(set)
+        @test nsites(set) == 3
+        @test length(set) == 0
+    end
+
     @testset "Two Qubit Gate Set :all" begin
         set = QubitCliffordGateSet(2,:all)
         @test nsites(set) == 2

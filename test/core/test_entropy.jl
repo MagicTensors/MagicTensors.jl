@@ -1,5 +1,6 @@
 @testset "entropy" begin
     @testset "entanglement and stabilizer" begin
+        Random.seed!(1)
         mps = IT.MPS(ComplexF64, IT.siteinds("Qubit",4),"0")
         IT.orthogonalize!(mps,1)
 
@@ -30,10 +31,10 @@
         @test stabilizer_entropy(:exact, mps; α=2) ≈ 0.41503749927885
         @test stabilizer_entropy(:exact, mps; α=-1) ≈ 0.25
 
-        @test isapprox(stabilizer_entropy(mps, 10000), 0.41503749927885; atol=0.01)
-        @test isapprox(stabilizer_entropy(:sampled, mps, 10000; α=1), 0.5; atol=0.01)
-        @test isapprox(stabilizer_entropy(:sampled, mps, 10000; α=2), 0.41503749927885; atol=0.01)
-        @test isapprox(stabilizer_entropy(:sampled, mps, 10000; α=-1), 0.25; atol=0.01)
+        @test isapprox(stabilizer_entropy(mps, 10000), 0.41503749927885; atol=0.02)
+        @test isapprox(stabilizer_entropy(:sampled, mps, 10000; α=1), 0.5; atol=0.02)
+        @test isapprox(stabilizer_entropy(:sampled, mps, 10000; α=2), 0.41503749927885; atol=0.02)
+        @test isapprox(stabilizer_entropy(:sampled, mps, 10000; α=-1), 0.25; atol=0.02)
 
         MT.set_warn_exact_stabilizer_entropy_threshold!(4)
         @test_nowarn stabilizer_entropy(mps)

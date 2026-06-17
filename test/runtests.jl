@@ -3,6 +3,7 @@ using JET
 
 using MagicTensors
 
+import Random
 import LinearAlgebra
 import ITensorMPS
 import QuantumClifford

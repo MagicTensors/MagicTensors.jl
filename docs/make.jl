@@ -21,7 +21,7 @@ makedocs(;
     authors="Gerald E. Fux",
     sitename="MagicTensors.jl",
     format=Documenter.HTML(;
-        canonical="https://gefux.github.io/MagicTensors.jl",
+        canonical="https://magictensors.github.io/MagicTensors.jl",
         edit_link="main",
         assets = ["assets/favicon.ico"]
     ),
@@ -37,6 +37,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/gefux/MagicTensors.jl",
+    repo="github.com/MagicTensors/MagicTensors.jl",
     devbranch="main",
 )

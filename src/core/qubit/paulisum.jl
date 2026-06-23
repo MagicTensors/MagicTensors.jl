@@ -15,8 +15,78 @@ set_qubit_pauli_sum_scalar_type!() =
 
 Implementation of `AbstractPauliSum` for qubit systems using the `QuantumClifford` package.
 
+# Constructors
+- `QubitPauliSum(n::Int)`: -- return an empty (complex) sum for a given number of qubits
+    `n`.
+- `QubitPauliSum(pauli::QubitPauli)`: -- return a `QubitPauliSum` with only a single Pauli 
+    string.
+- `QubitPauliSum(paulis::Vector{<:QubitPauli}, coeffs::Vector{<:Number})`: -- return a
+    the sum of `QubitPauli`s `pauli` with coefficients `coeffs`.
+
+# Examples
+- Basic `QubitPauliSum` constructors and operations:
+```julia
+julia> QubitPauliSum(3)
+QubitPauliSum{ComplexF64, Vector{UInt64}} on 3 sites, with 0 terms:
+
+julia> QubitPauliSum(QubitPauli"XXI")
+QubitPauliSum{ComplexF64, Vector{UInt64}} on 3 sites, with 1 terms:
+(+1.000000e+00 +0.000000e+00im) + XX_
+
+julia> x = QubitPauliSum([QubitPauli(3), QubitPauli"XXI"], [0.5, -0.5])
+QubitPauliSum{ComplexF64, Vector{UInt64}} on 3 sites, with 2 terms:
+(+5.000000e-01 +0.000000e+00im) + ___
+(-5.000000e-01 +0.000000e+00im) + XX_
+
+julia> embed(x,5,[1,3,5])
+QubitPauliSum{ComplexF64, Vector{UInt64}} on 5 sites, with 2 terms:
+(+5.000000e-01 +0.000000e+00im) + _____
+(-5.000000e-01 +0.000000e+00im) + X_X__
+
+julia> nsites(x)
+3
+
+julia> length(x)
+2
+```
+
+- Arithmetic
+```julia
+julia> x = 0.5 *(QubitPauli(3) + QubitPauli"XXI")
+QubitPauliSum{ComplexF64, Vector{UInt64}} on 3 sites, with 2 terms:
+(+5.000000e-01 +0.000000e+00im) + ___
+(+5.000000e-01 +0.000000e+00im) + XX_
+
+julia> push!(x, QubitPauli"IIZ", 0.1im)
+QubitPauliSum{ComplexF64, Vector{UInt64}} on 3 sites, with 3 terms:
+(+5.000000e-01 +0.000000e+00im) + ___
+(+0.000000e+00 +1.000000e-01im) + __Z
+(+5.000000e-01 +0.000000e+00im) + XX_
+
+julia> x = x + 0.3*QubitPauli"IIZ"
+QubitPauliSum{ComplexF64, Vector{UInt64}} on 3 sites, with 3 terms:
+(+5.000000e-01 +0.000000e+00im) + ___
+(+3.000000e-01 +1.000000e-01im) + __Z
+(+5.000000e-01 +0.000000e+00im) + XX_
+
+julia> 2*x-QubitPauli(3) ≈ (0.6+0.2im)*QubitPauli"IIZ" + QubitPauli"XXI"
+true
+```
+
+- Convert to `ITensorMPS.OpSum`:
+```julia
+julia> using ITensorMPS: OpSum
+
+julia> OpSum((0.6+0.2im)*QubitPauli"IIZ" + QubitPauli"XXI")
+sum(
+  0.6 + 0.2im Z(3,)
+  1.0 X(1,) X(2,)
+)
+```
+
 # See also
-- [`AbstractPauliSum`](@ref)
+- [`AbstractPauli`](@ref), [`AbstractPauliSum`](@ref), [`QubitPauli`](@ref)
+- [`embed`](@ref), [`nsites`](@ref)
 """
 mutable struct QubitPauliSum{Tₛ<:Number,Tₚ<:AbstractVector{<:Unsigned}} <: AbstractPauliSum
     nsites::Int
@@ -31,12 +101,7 @@ function QubitPauliSum{Tₛ,Tₚ}(n::Int) where
     return QubitPauliSum{Tₛ,Tₚ}(n, Dict{Tₚ,Tₛ}())
 end
 
-"""
-    QubitPauliSum(n::Int)
 
-Constructor for `QubitPauliSum` that initializes an empty (complex) sum for a given number
-of qubits `n`.
-"""
 function QubitPauliSum(n::Int)
     Tₛ = QUBIT_PAULI_SUM_SCALAR_TYPE[]
     Tₚ = typeof(zero(PauliOperator, n).xz)

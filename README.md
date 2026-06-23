@@ -24,6 +24,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 H = − X₁ Z₂ − ∑ᵢ Zᵢ₋₁ Xᵢ Zᵢ₊₁ − Xₙ₋₁ Zₙ
 
 ```Julia
+using Pkg
+Pkg.add(url="https://github.com/MagicTensors/MagicTensors.jl")
 using MagicTensors
 
 # -- Parameters ----------------------------------------------------------------------------

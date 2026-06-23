@@ -13,10 +13,47 @@ Implementation of `AbstractPauli` for qubit systems using the `QuantumClifford` 
     `QuantumClifford.PauliOperator`.
 - `QubitPauli(n::Int)`: -- return an identity operator on `n` qubits.
 - `@QubitPauli_str(s::AbstractString)`: -- macro, using the same String to Pauli conversion
-    as in `QuantumClifford` (e.g. `QubitPauli"-iIXYZ"`).
+    as in `QuantumClifford`.
+
+# Examples
+- Basic `QubitPauli` constructors and operations:
+```julia
+julia> QubitPauli(3)
++ ___
+
+julia> QubitPauli"-iIZXY"
+-i_ZXY
+
+julia> QubitPauli"iXYZ" == QubitPauli"XYZ"
+false
+
+julia> QubitPauli"iXYZ" ≈ QubitPauli"XYZ"
+true
+
+julia> QubitPauli"-XYZ" == -QubitPauli"XYZ"
+true
+
+julia> embed(QubitPauli"XYZ",5,[3,5,2])
++ _ZX_Y
+
+julia> nsites(QubitPauli"-iIXI")
+3
+```
+
+- Conversion between `QuantumClifford.PauliOperator` and `QubitPauli`:
+```julia
+julia> using QuantumClifford: PauliOperator
+
+julia> QubitPauli(PauliOperator(Bool[0,0,1,1], Bool[0,1,0,1]))
++ _ZXY
+
+julia> PauliOperator(QubitPauli"IXYZ")
++ _XYZ
+```
 
 # See also
-- [`AbstractPauli`](@ref)
+- [`AbstractPauli`](@ref), [`QubitPauliSum`](@ref)
+- [`embed`](@ref), [`nsites`](@ref)
 """
 struct QubitPauli <: AbstractPauli
     pauli::PauliOperator

@@ -41,6 +41,7 @@ const QC = QuantumClifford
         include("core/qubit/test_cliffordgate.jl")
         include("core/qubit/test_cliffordgateset.jl")
         include("core/qubit/test_camps.jl")
+        include("core/qubit/test_disentangler.jl")
         include("core/qubit/test_dmrg.jl")
     end
 

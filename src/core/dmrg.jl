@@ -30,7 +30,7 @@ function dmrg!(
         mps[j] = psi[j]
     end
 
-    return energy, disentangle!(camps, disentangler)
+    return energy, disentangle!(disentangler, camps)
 end
 
 # -- IterativeDmrgDisentangler --
@@ -40,7 +40,7 @@ end
 
 TODO
 """
-struct IterativeDmrgDisentangler <: AbstractDisentangler
+struct IterativeDmrgDisentangler <: AbstractDmrgDisentangler
     disentangler::AbstractStandAloneDisentangler
     max_iter::Int
     min_energy_gain::Real

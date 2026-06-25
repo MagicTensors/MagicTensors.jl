@@ -75,6 +75,8 @@ export QubitCliffordGateSet
 include("core/qubit/camps.jl")
 export QubitCAMPS
 
+include("core/qubit/disentangler.jl")
+
 include("core/qubit/dmrg.jl")
 
 # -- Functions ------------------------

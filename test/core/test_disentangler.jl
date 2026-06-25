@@ -18,7 +18,7 @@
     
     @testset "TrivialDisentangler" begin
         a = deepcopy(camps)
-        res = disentangle!(a, TrivialDisentangler())
+        res = disentangle!(TrivialDisentangler(), a)
         @test length(res) == 3
         @test res[1] == 0
         @test res[2] == 0.0
@@ -27,8 +27,7 @@
     @testset "GreedySweepDisentangler" begin
         a = deepcopy(camps)
         res = disentangle!(
-            a,
-            GreedySweepDisentangler(QubitCliffordGateSet(2,:entangle); cutoff=1e-12))
+            GreedySweepDisentangler(QubitCliffordGateSet(2,:entangle); cutoff=1e-12), a)
         @test length(res) == 3
         @test res[1] == 6
         @test res[2] ≈ 6.0
@@ -48,18 +47,18 @@
         greedy_disentangler = GreedySweepDisentangler(
             QubitCliffordGateSet(2,:entangle); cutoff=1e-12)
         iter_disentangler = IterativeDisentangler(greedy_disentangler, 10)
-        res = disentangle!(a, iter_disentangler)
+        res = disentangle!(iter_disentangler, a)
         @test length(res) == 3
         @test res[1] == 9
         @test res[2] ≈ 9.0
 
         @test begin
-            expectation(a,QubitPauli"ZIIIII") ≈ 1 &&
-            expectation(a,QubitPauli"IZIIII") ≈ 1 &&
-            expectation(a,QubitPauli"IIZIII") ≈ 1 &&
-            expectation(a,QubitPauli"IIIZII") ≈ 1 &&
-            expectation(a,QubitPauli"IIIIZI") ≈ 1 &&
-            expectation(a,QubitPauli"IIIIIZ") ≈ 1 
+            expectation(a, QubitPauli"ZIIIII") ≈ 1 &&
+            expectation(a, QubitPauli"IZIIII") ≈ 1 &&
+            expectation(a, QubitPauli"IIZIII") ≈ 1 &&
+            expectation(a, QubitPauli"IIIZII") ≈ 1 &&
+            expectation(a, QubitPauli"IIIIZI") ≈ 1 &&
+            expectation(a, QubitPauli"IIIIIZ") ≈ 1 
         end
     end
 
@@ -69,7 +68,7 @@
         @test length(res) == 3
         @test res[1] == 0
         @test res[2] == 0.0
-        @test expectation(a,QubitPauli"ZIIIII") ≈ -1
+        @test expectation(a, QubitPauli"ZIIIII") ≈ -1
     end
 
 end

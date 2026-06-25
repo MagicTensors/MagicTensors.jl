@@ -11,6 +11,13 @@ abstract type AbstractDisentangler end
     AbstractStandAloneDisentangler <: AbstractDisentangler
 
 TODO
+
+# Required methods
+Implementations `ConcreteStandAloneDisentangler<:AbstractStandAloneDisentangler` must
+support:
+- `disentangle!(de::ConcreteStandAloneDisentangler, camps::AbstractCAMPS) ->
+  num, gain, info`: -- Lower the entanglement in the MPS part of `camps` by finding a 
+  transformation using the `de` method. 
 """
 abstract type AbstractStandAloneDisentangler <: AbstractDisentangler end
 
@@ -18,6 +25,14 @@ abstract type AbstractStandAloneDisentangler <: AbstractDisentangler end
     AbstractSweepDisentangler <: AbstractStandAloneDisentangler
 
 TODO
+
+# Required methods
+Implementations `ConcreteSweepDisentangler<:AbstractSweepDisentangler` must
+support:
+- `disentangle!(de::ConcreteSweepDisentangler, camps::AbstractCAMPS, bond::Int, r::Bool) -> 
+  num, gain, info`: -- Lower the entanglement in the MPS part of `camps` between site `bond`
+  and `bond +1` by finding a transformation using the `de` method. Also, move the mps
+  orthogonality center to site `bond+1` when `r==true` and to `bond` otherwise.
 """
 abstract type AbstractSweepDisentangler <: AbstractStandAloneDisentangler end
 
@@ -30,12 +45,12 @@ function apply_and_disentangle!(
     args...;
     kwargs...)
     apply!(camps, args...; kwargs...)
-    return disentangle!(camps, disentangler)
+    return disentangle!(disentangler, camps)
 end
 
 function disentangle!(
-    camps::AbstractCAMPS,
-    disentangler::AbstractSweepDisentangler)
+    disentangler::AbstractSweepDisentangler,
+    camps::AbstractCAMPS)
 
     N = nsites(camps)
     mps = get_mps(camps)
@@ -47,7 +62,7 @@ function disentangle!(
     right_to_left = zip(collect(N-1:-1:1), zeros(Bool, N - 1))
     for (n, move_ortho_right) in vcat(collect(left_to_right), collect(right_to_left))
         num, gain, info =
-            disentangle!(camps, disentangler, n, move_ortho_right)
+            disentangle!(disentangler, camps, n, move_ortho_right)
         if num == 0
             ITensorMPS.orthogonalize!(mps, move_ortho_right ? n+1 : n)
             continue
@@ -71,7 +86,7 @@ TODO
 """
 struct TrivialDisentangler <: AbstractStandAloneDisentangler end
 
-disentangle!(::AbstractCAMPS, ::TrivialDisentangler) = 0, 0.0, Any[]
+disentangle!(::TrivialDisentangler, ::AbstractCAMPS) = 0, 0.0, Any[]
 
 
 # -- IterativeDisentangler --
@@ -93,11 +108,11 @@ IterativeDisentangler(disentangler::AbstractStandAloneDisentangler,
     return IterativeDisentangler(disentangler, max_iter, min_num, min_gain)
 
 function disentangle!(
-    camps::AbstractCAMPS,
-    disentangler::IterativeDisentangler)
+    disentangler::IterativeDisentangler,
+    camps::AbstractCAMPS)
     res_info = Tuple{typeof(1),typeof(1.0),Any}[]
     for iter in 1:disentangler.max_iter
-        num, gain, info = disentangle!(camps, disentangler.disentangler)
+        num, gain, info = disentangle!(disentangler.disentangler, camps)
         push!(res_info, (num, gain, info))
         if num < disentangler.min_num || gain < disentangler.min_gain
             break
@@ -123,12 +138,15 @@ struct GreedySweepDisentangler <: AbstractSweepDisentangler
     svd_kwargs::Dict{Symbol, Any}
 end
 
-GreedySweepDisentangler(gateset::AbstractCliffordGateSet; α=1::Real, ϵ=1.0e-12::Real, svd_kwargs...) =
-    GreedySweepDisentangler(gateset, α, ϵ, svd_kwargs)
+function GreedySweepDisentangler(
+    gateset::AbstractCliffordGateSet;
+    α=1::Real, ϵ=1.0e-12::Real, svd_kwargs...)
+    return GreedySweepDisentangler(gateset, α, ϵ, svd_kwargs)
+end
 
 function disentangle!(
-    camps::AbstractCAMPS,
     disentangler::GreedySweepDisentangler,
+    camps::AbstractCAMPS,
     site::Int,
     move_orto_right::Bool)
     

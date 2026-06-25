@@ -21,7 +21,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ## Quickstart
 
 ### DMRG - Cluster State
-H = − X₁ Z₂ − ∑ᵢ Zᵢ₋₁ Xᵢ Zᵢ₊₁ − Xₙ₋₁ Zₙ
+H = − X₁ Z₂ − ∑ᵢ Zᵢ₋₁ Xᵢ Zᵢ₊₁ − Zₙ₋₁ Xₙ
 
 ```Julia
 using Pkg

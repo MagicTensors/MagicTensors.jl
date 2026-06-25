@@ -1,0 +1,3 @@
+foreground: 37720bff
+shadow: 7aa065ff
+area: a1c08bff

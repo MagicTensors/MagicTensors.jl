@@ -9,7 +9,8 @@
 
         camps = QubitCAMPS(2)
         disentangler = IterativeDmrgDisentangler(
-            GreedySweepDisentangler(QubitCliffordGateSet(2,:entangle); cutoff=1e-12),
+            SweepDisentangler(
+                GreedyDisentangler(QubitCliffordGateSet(2,:entangle); cutoff=1e-12)),
             1;
             min_energy_gain=1e-10,
             warn_max_iter=true)

@@ -94,6 +94,7 @@ julia> Pkg.add(url="https://github.com/MagicTensors/MagicTensors.jl")
     - [`SweepDisentangler `](@ref)
   - [`AbstractLocalDisentangler`](@ref)
       - [`GreedyDisentangler`](@ref)
+      - [`MetropolisDisentangler`](@ref)
   - [`AbstractDmrgDisentangler`](@ref)
     - [`IterativeDmrgDisentangler`](@ref)
 

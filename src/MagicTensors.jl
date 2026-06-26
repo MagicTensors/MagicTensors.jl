@@ -45,10 +45,11 @@ include("core/entropy.jl")
 include("core/disentangler.jl")
 export AbstractDisentangler
 export AbstractStandAloneDisentangler
-export AbstractSweepDisentangler
+export AbstractLocalDisentangler
 export TrivialDisentangler
 export IterativeDisentangler
-export GreedySweepDisentangler
+export SweepDisentangler
+export GreedyDisentangler
 
 include("core/dmrg.jl")
 export AbstractDmrgDisentangler

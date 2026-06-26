@@ -24,10 +24,11 @@
         @test res[2] == 0.0
     end
 
-    @testset "GreedySweepDisentangler" begin
+    @testset "SweepDisentangler" begin
         a = deepcopy(camps)
         res = disentangle!(
-            GreedySweepDisentangler(QubitCliffordGateSet(2,:entangle); cutoff=1e-12), a)
+            SweepDisentangler(
+                GreedyDisentangler(QubitCliffordGateSet(2,:entangle); cutoff=1e-12)), a)
         @test length(res) == 3
         @test res[1] == 6
         @test res[2] ≈ 6.0
@@ -44,8 +45,8 @@
 
     @testset "IterativeDisentangler" begin
         a = deepcopy(camps)
-        greedy_disentangler = GreedySweepDisentangler(
-            QubitCliffordGateSet(2,:entangle); cutoff=1e-12)
+        greedy_disentangler = SweepDisentangler(GreedyDisentangler(
+            QubitCliffordGateSet(2,:entangle); cutoff=1e-12))
         iter_disentangler = IterativeDisentangler(greedy_disentangler, 10)
         res = disentangle!(iter_disentangler, a)
         @test length(res) == 3

@@ -22,19 +22,19 @@ support:
 abstract type AbstractStandAloneDisentangler <: AbstractDisentangler end
 
 """
-    AbstractSweepDisentangler <: AbstractStandAloneDisentangler
+    AbstractLocalDisentangler <: AbstractDisentangler
 
 TODO
 
 # Required methods
-Implementations `ConcreteSweepDisentangler<:AbstractSweepDisentangler` must
+Implementations `ConcreteLocalDisentangler<:AbstractLocalDisentangler` must
 support:
 - `disentangle!(de::ConcreteSweepDisentangler, camps::AbstractCAMPS, bond::Int, r::Bool) -> 
   num, gain, info`: -- Lower the entanglement in the MPS part of `camps` between site `bond`
   and `bond +1` by finding a transformation using the `de` method. Also, move the mps
   orthogonality center to site `bond+1` when `r==true` and to `bond` otherwise.
 """
-abstract type AbstractSweepDisentangler <: AbstractStandAloneDisentangler end
+abstract type AbstractLocalDisentangler <: AbstractDisentangler end
 
 
 # -- Interface Methods ---------------------------------------------------------------------
@@ -46,33 +46,6 @@ function apply_and_disentangle!(
     kwargs...)
     apply!(camps, args...; kwargs...)
     return disentangle!(disentangler, camps)
-end
-
-function disentangle!(
-    disentangler::AbstractSweepDisentangler,
-    camps::AbstractCAMPS)
-
-    N = nsites(camps)
-    mps = get_mps(camps)
-
-    res_info = Tuple{typeof(1),typeof(1.0),Any}[]
-    
-    ITensorMPS.orthogonalize!(mps, 1)
-    left_to_right = zip(collect(1:N-2), ones(Bool, N - 2))
-    right_to_left = zip(collect(N-1:-1:1), zeros(Bool, N - 1))
-    for (n, move_ortho_right) in vcat(collect(left_to_right), collect(right_to_left))
-        num, gain, info =
-            disentangle!(disentangler, camps, n, move_ortho_right)
-        if num == 0
-            ITensorMPS.orthogonalize!(mps, move_ortho_right ? n+1 : n)
-            continue
-        end
-        push!(res_info, (num, gain, info))
-    end
-
-    res_num = sum([x[1] for x in res_info])
-    res_gain = sum([x[2] for x in res_info])
-    return res_num, res_gain, res_info
 end
 
 # -- List Entries --------------------------------------------------------------------------
@@ -124,28 +97,66 @@ function disentangle!(
 end
 
 
-# -- GreedySweepDisentangler --
-
+# -- SweepDisentangler --
 """
-    GreedySweepDisentangler
+    SweepDisentangler <: AbstractStandAloneDisentangler
 
 TODO
 """
-struct GreedySweepDisentangler <: AbstractSweepDisentangler 
+struct SweepDisentangler <: AbstractStandAloneDisentangler
+    local_disentangler::AbstractLocalDisentangler
+end
+
+function disentangle!(
+    disentangler::SweepDisentangler,
+    camps::AbstractCAMPS)
+
+    N = nsites(camps)
+    mps = get_mps(camps)
+
+    res_info = Tuple{typeof(1),typeof(1.0),Any}[]
+    
+    ITensorMPS.orthogonalize!(mps, 1)
+    left_to_right = zip(collect(1:N-2), ones(Bool, N - 2))
+    right_to_left = zip(collect(N-1:-1:1), zeros(Bool, N - 1))
+    for (n, move_ortho_right) in vcat(collect(left_to_right), collect(right_to_left))
+        num, gain, info =
+            disentangle!(disentangler.local_disentangler, camps, n, move_ortho_right)
+        if num == 0
+            ITensorMPS.orthogonalize!(mps, move_ortho_right ? n+1 : n)
+            continue
+        end
+        push!(res_info, (num, gain, info))
+    end
+
+    res_num = sum([x[1] for x in res_info])
+    res_gain = sum([x[2] for x in res_info])
+    return res_num, res_gain, res_info
+end
+
+
+# -- GreedyDisentangler --
+
+"""
+    GreedyDisentangler
+
+TODO
+"""
+struct GreedyDisentangler <: AbstractLocalDisentangler 
     gateset::AbstractCliffordGateSet
     α::Real
     ϵ::Real
     svd_kwargs::Dict{Symbol, Any}
 end
 
-function GreedySweepDisentangler(
+function GreedyDisentangler(
     gateset::AbstractCliffordGateSet;
     α=1::Real, ϵ=1.0e-12::Real, svd_kwargs...)
-    return GreedySweepDisentangler(gateset, α, ϵ, svd_kwargs)
+    return GreedyDisentangler(gateset, α, ϵ, svd_kwargs)
 end
 
 function disentangle!(
-    disentangler::GreedySweepDisentangler,
+    disentangler::GreedyDisentangler,
     camps::AbstractCAMPS,
     site::Int,
     move_orto_right::Bool)

@@ -63,6 +63,29 @@
         end
     end
 
+    @testset "Metropolis Disentangler" begin
+        # create a CAMPS = |000⟩
+        # with an MPS with a Bell pair between 1-3
+        a = QubitCAMPS(3)
+        transform!(a, QubitCliffordGate(QC.tHadamard), [1])
+        transform!(a, QubitCliffordGate(QC.tCNOT), [1,2])
+        transform!(a, QubitCliffordGate(QC.tSWAP), [2,3])
+
+        Random.seed!(1)
+        de = IterativeDisentangler(
+                SweepDisentangler(
+                    MetropolisDisentangler(QubitCliffordGateSet(2,:all), 0.1; cutoff=1e-9)
+                ),
+                64;
+                min_num=0,
+                min_gain=-Inf)
+
+        res = disentangle!(de, a)
+        @test length(res) == 3
+        @test res[1] > 0
+        @test res[2] ≈ 2.0
+    end
+
     @testset "apply_and_disentangle!" begin
         a = deepcopy(camps)
         res = apply_and_disentangle!(TrivialDisentangler(), a, QubitPauli"X",[1])

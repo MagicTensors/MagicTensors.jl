@@ -50,6 +50,7 @@ export TrivialDisentangler
 export IterativeDisentangler
 export SweepDisentangler
 export GreedyDisentangler
+export MetropolisDisentangler
 
 include("core/dmrg.jl")
 export AbstractDmrgDisentangler

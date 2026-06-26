@@ -200,4 +200,65 @@ function disentangle!(
     end
 end
 
+
+# -- MetropolisDisentangler --
+
+"""
+    MetropolisDisentangler
+
+TODO
+"""
+struct MetropolisDisentangler <: AbstractLocalDisentangler 
+    gateset::AbstractCliffordGateSet
+    T::Real
+    α::Real
+    svd_kwargs::Dict{Symbol, Any}
+end
+
+function MetropolisDisentangler(
+    gateset::AbstractCliffordGateSet, T::Real;
+    α=1::Real, svd_kwargs...)
+    return MetropolisDisentangler(gateset, T, α, svd_kwargs)
+end
+
+function disentangle!(
+    disentangler::MetropolisDisentangler,
+    camps::AbstractCAMPS,
+    site::Int,
+    move_orto_right::Bool)
+    
+    n = site
+    gateset = disentangler.gateset
+    svd_kwargs = disentangler.svd_kwargs
+
+    id = one(gateset)
+    mps = get_mps(camps)
+    gate_index = rand(1:length(gateset))
+    gate = gateset[gate_index]
+
+    U, S, V = apply_and_svd(mps, Matrix(id), n; svd_kwargs...)
+    start_entanglement = renyi_entropy(Vector(LinearAlgebra.diag(S)).^2; α=disentangler.α)
+
+    U, S, V = apply_and_svd(mps, Matrix(gate), n; svd_kwargs...)
+    final_entanglement = renyi_entropy(Vector(LinearAlgebra.diag(S)).^2; α=disentangler.α)
+
+    gain = start_entanglement - final_entanglement
+    if rand() > exp(gain / disentangler.T)
+        return 0, 0.0, 0
+    end
+
+    if move_orto_right
+        mps[n] = U
+        mps[n+1] = S*V
+        ITensorMPS.set_ortho_lims!(mps, n+1:n+1)
+    else
+        mps[n] = U*S
+        mps[n+1] = V
+        ITensorMPS.set_ortho_lims!(mps, n:n)
+    end
+    apply_to_clifford_dagger!(camps, gate, [n,n+1])
+
+    return 1, gain, gate_index
+end
+
 # ------------------------------------------------------------------------------------------
